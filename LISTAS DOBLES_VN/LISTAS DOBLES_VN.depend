@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1732296109 source:c:\users\user\onedrive - universidad de las fuerzas armadas espe\documentos\proyectos_vanne\listas dobles\listasdoble.cpp
+	"ListasDoble.h"
+
+1732296105 c:\users\user\onedrive - universidad de las fuerzas armadas espe\documentos\proyectos_vanne\listas dobles\listasdoble.h
+	"Nodo.h"
+
+1732296106 c:\users\user\onedrive - universidad de las fuerzas armadas espe\documentos\proyectos_vanne\listas dobles\nodo.h
+	<iostream>
+	<string>
+
+1732296110 source:c:\users\user\onedrive - universidad de las fuerzas armadas espe\documentos\proyectos_vanne\listas dobles\main.cpp
+	"ListasDoble.h"
+	<stdlib.h>
+
+1732296107 source:c:\users\user\onedrive - universidad de las fuerzas armadas espe\documentos\proyectos_vanne\listas dobles\nodo.cpp
+	"Nodo.h"
+
