@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1732294260 source:c:\users\user\onedrive - universidad de las fuerzas armadas espe\documentos\proyectos_vanne\listas_vn\lista_simple.cpp
+	"Lista_Simple.h"
+	<iostream>
+	<algorithm>
+
+1732294260 c:\users\user\onedrive - universidad de las fuerzas armadas espe\documentos\proyectos_vanne\listas_vn\lista_simple.h
+	"Nodo.h"
+	<string>
+
+1732294260 c:\users\user\onedrive - universidad de las fuerzas armadas espe\documentos\proyectos_vanne\listas_vn\nodo.h
+	<string>
+
+1732294260 source:c:\users\user\onedrive - universidad de las fuerzas armadas espe\documentos\proyectos_vanne\listas_vn\main_llistas_simples.cpp
+	"Lista_Simple.h"
+	"Validaciones.h"
+	<iostream>
+
+1732294260 c:\users\user\onedrive - universidad de las fuerzas armadas espe\documentos\proyectos_vanne\listas_vn\validaciones.h
+	<string>
+
+1732294260 source:c:\users\user\onedrive - universidad de las fuerzas armadas espe\documentos\proyectos_vanne\listas_vn\nodo.cpp
+	"Nodo.h"
+
+1732294260 source:c:\users\user\onedrive - universidad de las fuerzas armadas espe\documentos\proyectos_vanne\listas_vn\validaciones.cpp
+	"Validaciones.h"
+	<cctype>
+
