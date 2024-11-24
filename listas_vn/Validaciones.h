@@ -1,6 +1,9 @@
 #pragma once
 #include <string>
-using namespace std;
 
-bool validarCedula(string cedula);
-bool validarSoloLetras(string texto);
+bool validarCedulaReal(const std::string& cedula);
+bool validarCedulaUnica(const std::string& cedula);
+void registrarCedula(const std::string& cedula);
+void eliminarCedula(const std::string& cedula);
+bool validarSoloLetras(const std::string& texto);
+bool existeCedula(const std::string& cedula);

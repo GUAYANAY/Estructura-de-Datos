@@ -28,7 +28,7 @@ bool ListaSimple::validarCedulaUnica(string cedula) {
 
 void ListaSimple::insertarACola(string cedula, string nombre, string apellido) {
     if (!validarCedulaUnica(cedula)) {
-        cout << "Error: La cédula ya existe en la lista.\n";
+        cout << "Error: La cedula ya existe en la lista.\n";
         return;
     }
 
@@ -42,7 +42,7 @@ void ListaSimple::insertarACola(string cedula, string nombre, string apellido) {
         }
         temp->setSiguiente(nuevo);
     }
-    cout << "Persona ingresada correctamente.\n";
+    //cout << "Persona ingresada correctamente.\n";
 }
 
 Nodo* ListaSimple::buscar(string cedula) {
@@ -68,7 +68,7 @@ bool ListaSimple::eliminar(string cedula) {
                 anterior->setSiguiente(temp->getSiguiente());
             }
             delete temp;
-            cout << "Persona eliminada correctamente.\n";
+            //cout << "Persona eliminada correctamente.\n";
             return true;
         }
         anterior = temp;
@@ -86,17 +86,19 @@ void ListaSimple::mostrar() {
     }
     while (temp != nullptr) {
         cout << "Cédula: " << temp->getCedula()
-             << ", Nombre: " << temp->getNombre()
-             << ", Apellido: " << temp->getApellido() << " -> ";
+             << "\nNombre: " << temp->getNombre()
+             << "\nApellido: " << temp->getApellido() << " -> ";
         temp = temp->getSiguiente();
     }
     cout << "NULL\n";
 }
 
+
+
 void ListaSimple::eliminarCaracter(string cedula, char caracter, ListaSimple& listaAuxiliar) {
     Nodo* temp = buscar(cedula);
     if (temp == nullptr) {
-        cout << "Cédula no encontrada.\n";
+        cout << "Cedula no encontrada.\n";
         return;
     }
 
@@ -114,5 +116,5 @@ void ListaSimple::eliminarCaracter(string cedula, char caracter, ListaSimple& li
     // Insertar en la lista auxiliar
     listaAuxiliar.insertarACola(temp->getCedula(), nuevoNombre, nuevoApellido);
 
-    cout << "Carácter eliminado correctamente. Lista auxiliar actualizada.\n";
+    cout << "Caracter eliminado correctamente. Lista auxiliar actualizada.\n";
 }

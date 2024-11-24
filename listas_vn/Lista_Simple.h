@@ -11,6 +11,7 @@ public:
     ListaSimple();
     ~ListaSimple();
 
+
     void insertarACola(string cedula, string nombre, string apellido);
     Nodo* buscar(string cedula);
     bool eliminar(string cedula);

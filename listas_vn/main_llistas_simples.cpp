@@ -1,7 +1,24 @@
 #include "Lista_Simple.h"
 #include "Validaciones.h"
 #include <iostream>
+#include <cstdlib> // Para system("cls") o system("clear")
 using namespace std;
+
+// Función para limpiar la consola
+void limpiarConsola() {
+#ifdef _WIN32
+    system("cls"); // Windows
+#else
+    system("clear"); // Linux/Mac
+#endif
+}
+
+// Función para pausar la consola
+void pausa() {
+    cout << "\nPresione ENTER para continuar...";
+    cin.ignore();
+    cin.get();
+}
 
 int main() {
     ListaSimple listaPrincipal;
@@ -11,78 +28,150 @@ int main() {
     int opcion;
 
     do {
-        cout << "\n** Menú de opciones **\n";
+        limpiarConsola();
+        cout << "** Menu de opciones **\n";
         cout << "1. Insertar persona\n";
         cout << "2. Buscar persona\n";
         cout << "3. Eliminar persona\n";
         cout << "4. Mostrar lista\n";
-        cout << "5. Eliminar caracter\n";
+        cout << "5. Eliminar caracter de nombre\n";
         cout << "6. Mostrar lista auxiliar\n";
         cout << "7. Salir\n";
         cout << "Seleccione una opcion: ";
         cin >> opcion;
 
+        limpiarConsola();
         switch (opcion) {
-            case 1:
-                cout << "Ingrese cédula: ";
-                cin >> cedula;
-                if (!validarCedula(cedula)) {
-                    cout << "Error: La cédula debe contener 10 números.\n";
-                    break;
-                }
-                cout << "Ingrese nombre: ";
-                cin >> nombre;
-                if (!validarSoloLetras(nombre)) {
-                    cout << "Error: El nombre debe contener solo letras.\n";
-                    break;
-                }
-                cout << "Ingrese apellido: ";
-                cin >> apellido;
-                if (!validarSoloLetras(apellido)) {
-                    cout << "Error: El apellido debe contener solo letras.\n";
-                    break;
-                }
-                listaPrincipal.insertarACola(cedula, nombre, apellido);
-                break;
+            case 1: { // Insertar persona
+                do {
+                    cout << "Ingrese cedula: ";
+                    cin >> cedula;
+                    if (!validarCedulaReal(cedula)) {
+                        cout << "Cedula invalida. Intente de nuevo.\n";
+                    } else if (!validarCedulaUnica(cedula)) {
+                        cout << "La cedula ya esta registrada. Intente de nuevo.\n";
+                    } else {
+                        break;
+                    }
+                } while (true);
 
-            case 2:
-                cout << "Ingrese cédula a buscar: ";
-                cin >> cedula;
-                if (listaPrincipal.buscar(cedula) != nullptr) {
+                do {
+                    cout << "Ingrese nombre: ";
+                    cin.ignore(); // Limpia el buffer
+                    getline(cin, nombre);
+                    if (!validarSoloLetras(nombre)) {
+                        cout << "Nombre invalido. Solo se permiten letras. Intente de nuevo.\n";
+                    } else {
+                        break;
+                    }
+                } while (true);
+
+                do {
+                    cout << "Ingrese apellido: ";
+                    getline(cin, apellido);
+                    if (!validarSoloLetras(apellido)) {
+                        cout << "Apellido invalido. Solo se permiten letras. Intente de nuevo.\n";
+                    } else {
+                        break;
+                    }
+                } while (true);
+
+                listaPrincipal.insertarACola(cedula, nombre, apellido);
+                registrarCedula(cedula); // Registrar cédula en el conjunto
+                cout << "Persona registrada exitosamente.\n";
+                pausa();
+                break;
+            }
+
+            case 2: { // Buscar persona
+                do {
+                    cout << "Ingrese cedula a buscar: ";
+                    cin >> cedula;
+                    if (!validarCedulaReal(cedula)) {
+                        cout << "Cedula invalida. Intente de nuevo.\n";
+                    } else {
+                        break;
+                    }
+                } while (true);
+
+                if (!existeCedula(cedula)) {
+                    cout << "Error: La cedula no existe.\n";
+                } else if (listaPrincipal.buscar(cedula) != nullptr) {
                     cout << "Persona encontrada.\n";
                 } else {
-                    cout << "Persona no encontrada.\n";
+                    cout << "Error: Persona no encontrada.\n";
                 }
+                pausa();
                 break;
+            }
 
-            case 3:
-                cout << "Ingrese cédula a eliminar: ";
-                cin >> cedula;
-                listaPrincipal.eliminar(cedula);
+            case 3: { // Eliminar persona
+                do {
+                    cout << "Ingrese cedula a eliminar: ";
+                    cin >> cedula;
+                    if (!validarCedulaReal(cedula)) {
+                        cout << "Cedula invalida. Intente de nuevo.\n";
+                    } else {
+                        break;
+                    }
+                } while (true);
+
+                if (!existeCedula(cedula)) {
+                    cout << "Error: La cedula no existe.\n";
+                } else {
+                    listaPrincipal.eliminar(cedula);
+                    eliminarCedula(cedula); // Eliminar cédula del conjunto
+                    cout << "Persona eliminada exitosamente.\n";
+                }
+                pausa();
                 break;
+            }
 
-            case 4:
+            case 4: { // Mostrar lista principal
                 listaPrincipal.mostrar();
+                pausa();
                 break;
+            }
 
-            case 5:
-                cout << "Ingrese cédula: ";
-                cin >> cedula;
-                cout << "Ingrese carácter a eliminar: ";
-                cin >> caracter;
-                listaPrincipal.eliminarCaracter(cedula, caracter, listaAuxiliar);
+            case 5: { // Eliminar carácter de nombre
+                do {
+                    cout << "Ingrese cedula: ";
+                    cin >> cedula;
+                    if (!validarCedulaReal(cedula)) {
+                        cout << "Cedula inválida. Intente de nuevo.\n";
+                    } else {
+                        break;
+                    }
+                } while (true);
+
+                if (!existeCedula(cedula)) {
+                    cout << "Error: La cedula no existe.\n";
+                } else {
+                    cout << "Ingrese caracter a eliminar: ";
+                    cin >> caracter;
+                    listaPrincipal.eliminarCaracter(cedula, caracter, listaAuxiliar);
+                }
+                pausa();
                 break;
+            }
 
-            case 6:
+            case 6: { // Mostrar lista auxiliar
                 listaAuxiliar.mostrar();
+                pausa();
                 break;
+            }
 
-            case 7:
+            case 7: { // Salir
                 cout << "Saliendo...\n";
+                pausa();
                 break;
+            }
 
-            default:
-                cout << "Opción inválida.\n";
+            default: {
+                cout << "Opción invalida. Intente de nuevo.\n";
+                pausa();
+                break;
+            }
         }
     } while (opcion != 7);
 
