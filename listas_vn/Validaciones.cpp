@@ -1,3 +1,9 @@
+/*************************
+ * Program: Validaciones de Listas Simples
+ * Author:  Erika Guayanay 
+ * Date: 20/11/2024
+ * University: Universidad de las Fuerzas Armadas - ESPE
+ *************************/
 #include "Validaciones.h"
 #include <iostream>
 #include <string>
@@ -6,26 +12,26 @@
 
 using namespace std;
 
-// Conjunto para almacenar las cédulas únicas
+// Conjunto para almacenar las cÃ©dulas Ãºnicas
 set<string> cedulasRegistradas;
 
 bool validarCedulaReal(const string& cedula) {
     if (cedula.length() != 10) {
-        cout << "Error: La cédula debe contener exactamente 10 dígitos.\n";
+        cout << "Error: La cÃ©dula debe contener exactamente 10 dÃ­gitos.\n";
         return false;
     }
 
     for (char c : cedula) {
         if (!isdigit(c)) {
-            cout << "Error: La cédula debe contener solo números.\n";
+            cout << "Error: La cÃ©dula debe contener solo nÃºmeros.\n";
             return false;
         }
     }
 
-    // Algoritmo de validación ecuatoriano
+    // Algoritmo de validaciÃ³n ecuatoriano
     int provincia = stoi(cedula.substr(0, 2));
     if (provincia < 1 || provincia > 24) {
-        cout << "Error: La cédula tiene un código de provincia inválido.\n";
+        cout << "Error: La cÃ©dula tiene un cÃ³digo de provincia invÃ¡lido.\n";
         return false;
     }
 
@@ -45,7 +51,7 @@ bool validarCedulaReal(const string& cedula) {
     int calculado = decenaSuperior - suma;
 
     if (calculado != digitoVerificador) {
-        cout << "Error: La cedula no es válida.\n";
+        cout << "Error: La cedula no es vÃ¡lida.\n";
         return false;
     }
 
@@ -54,7 +60,7 @@ bool validarCedulaReal(const string& cedula) {
 
 bool validarCedulaUnica(const string& cedula) {
     if (cedulasRegistradas.find(cedula) != cedulasRegistradas.end()) {
-        cout << "Error: La cédula ya está registrada.\n";
+        cout << "Error: La cÃ©dula ya estÃ¡ registrada.\n";
         return false;
     }
     return true;

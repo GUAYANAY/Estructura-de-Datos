@@ -1,3 +1,9 @@
+/*************************
+ * Program:Validaciones de Listas Simples
+ * Author:  Erika Guayanay 
+ * Date: 20/11/2024
+ * University: Universidad de las Fuerzas Armadas - ESPE
+ *************************/
 #pragma once
 #include <string>
 

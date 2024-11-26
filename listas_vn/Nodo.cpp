@@ -1,3 +1,9 @@
+/*************************
+ * Program: Listas Simples
+ * Author:  Erika Guayanay 
+ * Date: 20/11/2024
+ * University: Universidad de las Fuerzas Armadas - ESPE
+ *************************/
 #include "Nodo.h"
 
 Nodo::Nodo(string cedula, string nombre, string apellido)

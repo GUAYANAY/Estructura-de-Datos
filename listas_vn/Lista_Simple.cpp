@@ -1,6 +1,12 @@
+/*************************
+ * Program: Listas Simples
+ * Author:  Erika Guayanay 
+ * Date: 20/11/2024
+ * University: Universidad de las Fuerzas Armadas - ESPE
+ *************************/
 #include "Lista_Simple.h"
 #include <iostream>
-#include <algorithm> // Asegúrate de incluir este encabezado
+#include <algorithm> // AsegÃºrate de incluir este encabezado
 
 using namespace std;
 
@@ -74,7 +80,7 @@ bool ListaSimple::eliminar(string cedula) {
         anterior = temp;
         temp = temp->getSiguiente();
     }
-    cout << "Persona con cédula " << cedula << " no encontrada.\n";
+    cout << "Persona con cÃ©dula " << cedula << " no encontrada.\n";
     return false;
 }
 
@@ -85,7 +91,7 @@ void ListaSimple::mostrar() {
         return;
     }
     while (temp != nullptr) {
-        cout << "Cédula: " << temp->getCedula()
+        cout << "CÃ©dula: " << temp->getCedula()
              << "\nNombre: " << temp->getNombre()
              << "\nApellido: " << temp->getApellido() << " -> ";
         temp = temp->getSiguiente();
@@ -105,7 +111,7 @@ void ListaSimple::eliminarCaracter(string cedula, char caracter, ListaSimple& li
     string nuevoNombre = temp->getNombre();
     string nuevoApellido = temp->getApellido();
 
-    // Eliminar el carácter del nombre
+    // Eliminar el carÃ¡cter del nombre
     nuevoNombre.erase(remove(nuevoNombre.begin(), nuevoNombre.end(), caracter), nuevoNombre.end());
     nuevoApellido.erase(remove(nuevoApellido.begin(), nuevoApellido.end(), caracter), nuevoApellido.end());
 
