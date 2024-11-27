@@ -18,11 +18,28 @@ bool validarTexto(const std::string& texto) {
     return std::regex_match(texto, std::regex("[A-Za-z ]+"));
 }
 
+
 long int ingresarCedula() {
-    long int cedula;
-    printf("Ingrese su cedula: ");
-    scanf("%ld", &cedula);
-    return cedula;
+    std::string entrada;
+    while (true) {
+        std::cout << "Ingrese su cedula: ";
+        std::cin >> entrada;
+
+        // Verificar si la entrada contiene solo números y tiene exactamente 10 dígitos
+        if (std::regex_match(entrada, std::regex("\\d+"))) {
+            if (entrada.length() == 10) {
+                return std::stol(entrada); // Convertir la entrada a número si cumple las condiciones
+            } else {
+                std::cout << "La cedula debe tener exactamente 10 dígitos. Intente de nuevo:\n";
+            }
+        } else {
+            std::cout << "La cedula solo permite números. Intente de nuevo:\n";
+        }
+
+        // Limpiar el flujo de entrada en caso de errores
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
 }
 
 bool validarCedulaReal(long int x) {
