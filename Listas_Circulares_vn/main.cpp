@@ -57,7 +57,7 @@ int main() {
                             imprimirResultadoCedula(false);
                         }
                     } else {
-                        cout << "Cédula inválida. Asegúrese de que tenga 10 dígitos numéricos.\n";
+                        cout << "Cedula invalida. Asegurese de que tenga 10 digitos numericos.\n";
                     }
                 } while (!cedulaValida);
 
