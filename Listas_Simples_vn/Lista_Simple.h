@@ -18,4 +18,5 @@ public:
     void mostrar();
     void eliminarCaracter(string cedula, char caracter, ListaSimple& listaAuxiliar);
     bool validarCedulaUnica(string cedula);
+    void cifrarCaracter(string cedula, char caracter, int desplazamiento, ListaSimple& listaAuxiliar);
 };

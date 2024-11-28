@@ -24,6 +24,7 @@ int main() {
     ListaSimple listaPrincipal;
     ListaSimple listaAuxiliar;
     string cedula, nombre, apellido;
+    int desplazar;
     char caracter;
     int opcion;
 
@@ -35,8 +36,9 @@ int main() {
         cout << "3. Eliminar persona\n";
         cout << "4. Mostrar lista\n";
         cout << "5. Eliminar caracter de nombre\n";
-        cout << "6. Mostrar lista auxiliar\n";
-        cout << "7. Salir\n";
+        cout << "6. Cifrar un caracter\n";
+        cout << "7. Mostrar lista auxiliar\n";
+        cout << "8. Salir\n";
         cout << "Seleccione una opcion: ";
         cin >> opcion;
 
@@ -149,14 +151,39 @@ int main() {
                 pausa();
                 break;
             }
+            case 6:{//cifrar caracter
+                do {
+                    cout << "Ingrese cedula: ";
+                    cin >> cedula;
+                    if (!validarCedulaReal(cedula)) {
+                        cout << "Cedula inválida. Intente de nuevo.\n";
+                    } else {
+                        break;
+                    }
+                } while (true);
 
-            case 6: { // Mostrar lista auxiliar
+                if (!existeCedula(cedula)) {
+                    cout << "Error: La cedula no existe.\n";
+                } else {
+                    cout << "Ingrese caracter a crifrar: ";
+                    cin >> caracter;
+
+                    cout<< "Ingrese el desplazamieno: ";
+                    cin>>desplazar;
+                    listaPrincipal.cifrarCaracter(cedula,caracter,desplazar, listaAuxiliar);
+                }
+                pausa();
+                break;
+
+            }
+
+            case 7: { // Mostrar lista auxiliar
                 listaAuxiliar.mostrar();
                 pausa();
                 break;
             }
 
-            case 7: { // Salir
+            case 8: { // Salir
                 cout << "Saliendo...\n";
                 pausa();
                 break;

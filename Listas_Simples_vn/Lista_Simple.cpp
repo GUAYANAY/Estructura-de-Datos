@@ -1,6 +1,8 @@
 #include "Lista_Simple.h"
 #include <iostream>
+#include <string>
 #include <algorithm> // Asegúrate de incluir este encabezado
+#include <cctype>
 
 using namespace std;
 
@@ -81,7 +83,7 @@ bool ListaSimple::eliminar(string cedula) {
 void ListaSimple::mostrar() {
     Nodo* temp = cabeza;
     if (temp == nullptr) {
-        cout << "NULL\n";
+        cout << "\nNULL\n";
         return;
     }
     while (temp != nullptr) {
@@ -118,3 +120,37 @@ void ListaSimple::eliminarCaracter(string cedula, char caracter, ListaSimple& li
 
     cout << "Caracter eliminado correctamente. Lista auxiliar actualizada.\n";
 }
+
+void ListaSimple::cifrarCaracter(string cedula, char caracter, int desplazamiento, ListaSimple& listaAuxiliar) {
+    Nodo* temp = buscar(cedula);
+    if (temp == nullptr) {
+        cout << "Cédula no encontrada.\n";
+        return;
+    }
+
+    string nuevoNombre = temp->getNombre();
+    string nuevoApellido = temp->getApellido();
+
+    // Definición de la lambda para cifrar caracteres
+    auto cifrar = [caracter, desplazamiento](char c) -> char {
+        if (c == caracter && isalpha(c)) { // Verifica si el carácter coincide y es una letra
+            char base = islower(c) ? 'a' : 'A'; // Determina si es minúscula o mayúscula
+            return (c - base + desplazamiento) % 26 + base; // Aplica el cifrado César
+        }
+        return c; // Devuelve el carácter sin modificar si no cumple la condición
+    };
+
+    // Aplicar cifrado al nombre y apellido
+    std::transform(nuevoNombre.begin(), nuevoNombre.end(), nuevoNombre.begin(), cifrar);
+    std::transform(nuevoApellido.begin(), nuevoApellido.end(), nuevoApellido.begin(), cifrar);
+
+    // Actualizar valores en el nodo original
+    temp->setNombre(nuevoNombre);
+    temp->setApellido(nuevoApellido);
+
+    // Insertar en la lista auxiliar
+    listaAuxiliar.insertarACola(temp->getCedula(), nuevoNombre, nuevoApellido);
+
+    cout << "Carácter cifrado correctamente con desplazamiento " << desplazamiento << ". Lista auxiliar actualizada.\n";
+}
+
