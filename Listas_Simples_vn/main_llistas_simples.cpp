@@ -23,7 +23,7 @@ void pausa() {
 int main() {
     ListaSimple listaPrincipal;
     ListaSimple listaAuxiliar;
-    string cedula, nombre, apellido;
+    string cedula, nombre,nombre2, apellido,apellido2;
     int desplazar;
     char caracter;
     int opcion;
@@ -73,10 +73,11 @@ int main() {
                     }
                 } while (!validarSoloLetras(apellido));
 
-                listaPrincipal.insertarACola(cedula, nombre, apellido);
+
+                listaPrincipal.insertarACola(cedula,nombre,apellido);
                 registrarCedula(cedula); // Registrar cédula en el conjunto
                 cout << "Persona registrada exitosamente.\n";
-                pausa();
+               // pausa();
                 break;
             }
 
@@ -98,7 +99,7 @@ int main() {
                 } else {
                     cout << "Error: Persona no encontrada.\n";
                 }
-                pausa();
+               // pausa();
                 break;
             }
 
@@ -126,7 +127,7 @@ int main() {
 
             case 4: { // Mostrar lista principal
                 listaPrincipal.mostrar();
-                pausa();
+                //pausa();
                 break;
             }
 
@@ -148,7 +149,7 @@ int main() {
                     cin >> caracter;
                     listaPrincipal.eliminarCaracter(cedula, caracter, listaAuxiliar);
                 }
-                pausa();
+               // pausa();
                 break;
             }
             case 6:{//cifrar caracter
@@ -172,20 +173,20 @@ int main() {
                     cin>>desplazar;
                     listaPrincipal.cifrarCaracter(cedula,caracter,desplazar, listaAuxiliar);
                 }
-                pausa();
+                //pausa();
                 break;
 
             }
 
             case 7: { // Mostrar lista auxiliar
                 listaAuxiliar.mostrar();
-                pausa();
+               // pausa();
                 break;
             }
 
             case 8: { // Salir
                 cout << "Saliendo...\n";
-                pausa();
+               // pausa();
                 break;
             }
 
@@ -195,7 +196,8 @@ int main() {
                 break;
             }
         }
-    } while (opcion != 7);
+        system("pause");
+    } while (opcion != 8);
 
     return 0;
 }

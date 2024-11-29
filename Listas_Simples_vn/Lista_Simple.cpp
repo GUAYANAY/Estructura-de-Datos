@@ -92,7 +92,7 @@ void ListaSimple::mostrar() {
              << "\nApellido: " << temp->getApellido() << " -> ";
         temp = temp->getSiguiente();
     }
-    cout << "NULL\n";
+    cout << "\nNULL\n";
 }
 
 

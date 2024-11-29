@@ -13,7 +13,7 @@ public:
     Nodo(string cedula, string nombre, string apellido);
     string getCedula();
     string getNombre();
-    string getApellido();
+    string getApellido();;
     void setNombre(string nuevoNombre);
     void setApellido(string nuevoApellido);
     Nodo* getSiguiente();

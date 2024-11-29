@@ -11,6 +11,7 @@ string Nodo::getNombre() {
     return nombre;
 }
 
+
 string Nodo::getApellido() {
     return apellido;
 }
