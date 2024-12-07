@@ -1,0 +1,20 @@
+[
+    {
+        "anioLanzamiento": "12/09/2003",
+        "autor": "mariela lema",
+        "calificacion": 5.0,
+        "genero": "asdas",
+        "isbn": "12",
+        "precio": 45.0,
+        "titulo": "eon"
+    },
+    {
+        "anioLanzamiento": "12/09/2003",
+        "autor": "mariela lema",
+        "calificacion": 8.0,
+        "genero": "asd",
+        "isbn": "18",
+        "precio": 24.0,
+        "titulo": "leon"
+    }
+]
