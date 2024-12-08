@@ -42,6 +42,8 @@
 		<Unit filename="NodoLibros.h" />
 		<Unit filename="Validaciones.cpp" />
 		<Unit filename="Validaciones.h" />
+		<Unit filename="VentanaAyuda.cpp" />
+		<Unit filename="VentanaAyuda.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

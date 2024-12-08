@@ -234,9 +234,10 @@
 1733540880 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\nodoautores.cpp
 	"NodoAutores.h"
 
-1733552452 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\main.cpp
+1733646570 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\main.cpp
 	"ListaAutores.h"
 	"ListaLibros.h"
+	"VentanaAyuda.h"
 	"Validaciones.h"
 	<iostream>
 	<cstdlib>
@@ -251,4 +252,7 @@
 	<regex>
 	<iostream>
 	<limits>
+
+1733646436 c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\ventanaayuda.h
+	<windows.h>
 
