@@ -32,6 +32,16 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="ListaAutores.cpp" />
+		<Unit filename="ListaAutores.h" />
+		<Unit filename="ListaLibros.cpp" />
+		<Unit filename="ListaLibros.h" />
+		<Unit filename="NodoAutores.cpp" />
+		<Unit filename="NodoAutores.h" />
+		<Unit filename="NodoLibros.cpp" />
+		<Unit filename="NodoLibros.h" />
+		<Unit filename="Validaciones.cpp" />
+		<Unit filename="Validaciones.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

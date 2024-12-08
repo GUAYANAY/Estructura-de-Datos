@@ -4,5 +4,17 @@
         "cedula": "0201655842",
         "fechaPublicacion": "01/27/1981",
         "nombre": "mariela"
+    },
+    {
+        "apellido": "guayanay",
+        "cedula": "1726631425",
+        "fechaPublicacion": "12/09/2048",
+        "nombre": "erika"
+    },
+    {
+        "apellido": "guayanay",
+        "cedula": "1103910715",
+        "fechaPublicacion": "12/09/2024",
+        "nombre": "julio"
     }
 ]

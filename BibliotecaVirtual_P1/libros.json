@@ -1,20 +1,29 @@
 [
     {
-        "anioLanzamiento": "12/09/2003",
+        "anioLanzamiento": "asdas",
         "autor": "mariela lema",
         "calificacion": 5.0,
-        "genero": "asdas",
+        "genero": "12/09/2003",
         "isbn": "12",
         "precio": 45.0,
         "titulo": "eon"
     },
     {
-        "anioLanzamiento": "12/09/2003",
+        "anioLanzamiento": "asd",
         "autor": "mariela lema",
         "calificacion": 8.0,
-        "genero": "asd",
+        "genero": "12/09/2003",
         "isbn": "18",
         "precio": 24.0,
         "titulo": "leon"
+    },
+    {
+        "anioLanzamiento": "12/09/2024",
+        "autor": "mariela lema",
+        "calificacion": 5.0,
+        "genero": "sdas",
+        "isbn": "534",
+        "precio": 14.0,
+        "titulo": "dasd"
     }
 ]

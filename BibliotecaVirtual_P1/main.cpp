@@ -1,5 +1,6 @@
 #include "ListaAutores.h"
 #include "ListaLibros.h"
+#include "VentanaAyuda.h"
 #include "Validaciones.h"
 #include <iostream>
 #include <cstdlib> // Para system()
@@ -247,6 +248,7 @@ void menuLibros(ListaLibros& listaLibros, ListaAutores& listaAutores) {
 int main() {
     ListaLibros listaLibros;
     ListaAutores listaAutores;
+    VentanaAyuda ventanaAyuda;
 
     listaAutores.cargarDesdeArchivoJSON();
     listaLibros.cargarDesdeArchivoJSON();
@@ -260,7 +262,8 @@ int main() {
          cout << "*****************************************************************************\n";
         cout << "1. Manejar Autores\n";
         cout << "2. Manejar Libros\n";
-        cout << "3. Salir\n";
+        cout << "3. Ayuda\n";
+        cout << "4. Salir\n";
         cout << "\n";
         cout << "Ingrese una opcion: ";
         ingresarOpcionMenu(opcionMenu);
@@ -278,10 +281,14 @@ int main() {
             menuLibros(listaLibros, listaAutores);
             break;
         case 3:
+            ventanaAyuda.mostrar();
+            break;
+        case 4:
             cout << "Saliendo...\n";
             break;
         }
-    } while (opcionMenu != 3);
+
+    } while (opcionMenu != 4);
 
     return 0;
 }
