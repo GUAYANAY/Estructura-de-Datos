@@ -1,11 +1,5 @@
 [
     {
-        "apellido": "lema",
-        "cedula": "0201655842",
-        "fechaPublicacion": "01/27/1981",
-        "nombre": "mariela"
-    },
-    {
         "apellido": "guayanay",
         "cedula": "1726631425",
         "fechaPublicacion": "12/09/2048",
@@ -13,8 +7,8 @@
     },
     {
         "apellido": "guayanay",
-        "cedula": "1103910715",
-        "fechaPublicacion": "12/09/2024",
-        "nombre": "julio"
+        "cedula": "1750764597",
+        "fechaPublicacion": "12/14/2010",
+        "nombre": "Kerly"
     }
 ]

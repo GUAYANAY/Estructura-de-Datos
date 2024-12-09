@@ -13,7 +13,14 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="C:/Users/Primario/vcpkg/packages/libharu_x64-windows/bin" />
+					<Add directory="C:/Users/Primario/vcpkg/installed/x64-windows/include" />
 				</Compiler>
+				<Linker>
+					<Add library="hpdf" />
+					<Add directory="C:/Users/Primario/vcpkg/packages/libharu_x64-windows/lib" />
+					<Add directory="C:/Users/Primario/vcpkg/installed/x64-windows/lib" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/BibliotecaVirtual_P1" prefix_auto="1" extension_auto="1" />
@@ -32,6 +39,14 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="BackupManager.cpp" />
+		<Unit filename="BackupManager.h" />
+		<Unit filename="Cursor.cpp" />
+		<Unit filename="Cursor.h" />
+		<Unit filename="GenerarPDFAutores.cpp" />
+		<Unit filename="GenerarPDFAutores.h" />
+		<Unit filename="GenerarPDFLibros.cpp" />
+		<Unit filename="GenerarPDFLibros.h" />
 		<Unit filename="ListaAutores.cpp" />
 		<Unit filename="ListaAutores.h" />
 		<Unit filename="ListaLibros.cpp" />

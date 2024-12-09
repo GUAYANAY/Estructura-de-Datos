@@ -7,8 +7,8 @@ NodoLibros::NodoLibros(string _titulo, string _autor, string _isbn, string _gene
     : titulo(_titulo), autor(_autor), isbn(_isbn), genero(_genero), anioLanzamiento(_anioLanzamiento), precio(_precio), calificacion(_calificacion),
       siguiente(nullptr), anterior(nullptr) {
     // Mensaje de depuración
-    cout << "Nodo creado: " << titulo << ", " << autor << ", " << isbn << ", "
-         << genero << ", " << anioLanzamiento << ", " << precio << ", " << calificacion << "\n";
+    //cout << "Nodo creado: " << titulo << ", " << autor << ", " << isbn << ", "
+       //  << genero << ", " << anioLanzamiento << ", " << precio << ", " << calificacion << "\n";
 }
 
 

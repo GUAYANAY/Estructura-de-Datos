@@ -1,33 +1,54 @@
 #include "ListaAutores.h"
 #include "ListaLibros.h"
-#include "VentanaAyuda.h"
 #include "Validaciones.h"
+#include "GenerarPDFLibros.h"
+#include "GenerarPDFAutores.h"
+#include "VentanaAyuda.h"
+#include "Cursor.h"
 #include <iostream>
 #include <cstdlib> // Para system()
 #include <limits>
-//#include "hpdf.h"
-
+#include <hpdf.h>
+#include <conio.h>
+#include "BackupManager.h"
+#include "FileUtils.h"
+#include <ctime>
+#include <string>
 // Men� para manejar las opciones de "Autores"
 void menuAutores(ListaAutores& listaAutores) {
     int opcion;
     do {
-        system("pause");
         system("cls");
-        cout << "*****************************************************************************";
-        cout << "\n\t\t\t\t MENU AUTORES \t\t\t\t\n";
-         cout << "*****************************************************************************\n";
-        cout << "\t1. Insertar Autor\n";
-        cout << "\t2. Buscar Autor\n";
-        cout << "\t3. Eliminar Autor\n";
-        cout << "\t4. Mostrar Autores\n";
-        cout << "\t5. Volver al menu principal\n";
-        cout << "\tIngrese una opcion: ";
-        ingresarOpcionMenu(opcion);
+        string opciones[] = {
+            "1. Insertar Autor",
+            "2. Buscar Autor",
+            "3. Eliminar Autor",
+            "4. Mostrar Autores",
+            "5. Generar PDF Autores",
+            "6. Crear Backup de Autores",
+            "7. Restaurar Backup de Autores",
+            "8. Volver al menu principal"
+        };
 
-        if (!validarOpcionMenu(opcion, 1, 5)) {
-            cout << "Opcion no valida. Intente de nuevo.\n";
-            continue;
+        Cursor cursor(8);  // Crear cursor para 8 opciones
+        cursor.actualizarMenu(opciones, 8);
+
+        while (true) {
+            if (cursor.teclaPresionada()) {
+                char tecla = _getch();
+                if (tecla == 72) {  // Flecha arriba
+                    cursor.moverArriba();
+                    cursor.actualizarMenu(opciones, 8);
+                } else if (tecla == 80) {  // Flecha abajo
+                    cursor.moverAbajo();
+                    cursor.actualizarMenu(opciones, 8);
+                } else if (tecla == 13) {  // Enter
+                    opcion = cursor.getPosicion() + 1;
+                    break;
+                }
+            }
         }
+
 
         switch (opcion) {
 
@@ -52,14 +73,17 @@ void menuAutores(ListaAutores& listaAutores) {
         cout << "Error: El apellido debe contener solo letras y espacios.\n";
         }
 
-        while (true) {
-        cout << "Ingrese fecha de publicación (MM/dd/yyyy): ";
+         while (true) {
+        cout << "Ingrese fecha de publicación (MM/DD/YYYY): ";
         cin >> fechaPublicacion;
-        if (validarFecha(fechaPublicacion)) break;
-        cout << "Error: La fecha debe tener el formato MM/dd/yyyy.\n";
+        if (validarFecha(fechaPublicacion)) {
+            break;
         }
+        cout << "Error: Intente nuevamente.\n";
+    }
 
     listaAutores.insertar(cedula, nombre, apellido, fechaPublicacion);
+    system("pause");
 
     break;
 }
@@ -71,7 +95,7 @@ void menuAutores(ListaAutores& listaAutores) {
         cout << "Ingrese cedula del autor: ";
         cin >> cedula;
         if (validarCedula(cedula)) break;
-        cout << "Error: La cedula ingresada no es válida\n";}
+        cout << "Error: La cedula ingresada no es valida\n";}
 
     NodoAutores* autor = listaAutores.buscar(cedula);
     if (autor) {
@@ -83,6 +107,7 @@ void menuAutores(ListaAutores& listaAutores) {
 
         cout << "Autor no encontrado con la cedula proporcionada.\n";
     }
+    system("pause");
     break;
 }
 
@@ -101,42 +126,88 @@ void menuAutores(ListaAutores& listaAutores) {
     } else {
         cout << "Error: No se encontró un autor con la cédula proporcionada.\n";
     }
+    system("pause");
     break;
         }
 
 
         case 4:
             listaAutores.mostrar();
-            break;
-        case 5:
-            cout << "Volviendo al menu principal...\n";
             system("pause");
             break;
+        case 5:
+           {
+            GenerarPDFAutores generador(listaAutores);
+            generador.generarPDF("autores_lista.pdf");
+            }
+            system("pause");
+            break;
+         case 6:
+                listaAutores.crearBackup(); // Crear backup
+                system("pause");
+                break;
+            case 7: {
+                // Listar los backups disponibles
+    std::vector<std::string> backupsAutores = BackupManager::listarArchivosEnCarpeta("BackupAutores");
+    if (backupsAutores.empty()) {
+        std::cout << "No hay backups disponibles en la carpeta 'BackupAutores'.\n";
+    } else {
+        std::cout << "Backups disponibles en 'BackupAutores':\n";
+        for (const auto& archivo : backupsAutores) {
+            std::cout << "- " << archivo << "\n";
         }
+        std::cout << "Ingrese el nombre del archivo de backup a restaurar: ";
+        std::string nombreBackup;
+        std::cin >> nombreBackup;
 
-    } while (opcion != 5);
+        // Intentar restaurar el backup
+        listaAutores.restaurarBackup(nombreBackup);
+
+    }
+    system("pause");
+    break;
+            }
+            case 8:
+                cout << "Volviendo al menu principal...\n";
+                system("pause");
+                break;
+        }
+    } while (opcion != 8);
 }
 
 // MenU para manejar las opciones de "Libros"
 void menuLibros(ListaLibros& listaLibros, ListaAutores& listaAutores) {
     int opcion;
     do {
-        system("pause");
         system("cls");
-       cout << "*****************************************************************************";
-        cout << "\n\t\t\t\t MENU LIBROS \t\t\t\t\n";
-         cout << "*****************************************************************************\n";
-        cout << "1. Insertar Libro\n";
-        cout << "2. Buscar Libro\n";
-        cout << "3. Eliminar Libro\n";
-        cout << "4. Mostrar Libros\n";
-        cout << "5. Volver al menu principal\n";
-        cout << "Ingrese una opcion: ";
-        ingresarOpcionMenu(opcion);
+        string opciones[] = {
+            "1. Insertar Libro",
+            "2. Buscar Libro",
+            "3. Eliminar Libro",
+            "4. Mostrar Libros",
+            "5. Generar PDF de Libros",
+            "6. Crear Backup de Libros",
+            "7. Restaurar Backup de Libros",
+            "8. Volver al menu principal"
+        };
 
-        if (!validarOpcionMenu(opcion, 1, 5)) {
-            cout << "Opcion no valida. Intente de nuevo.\n";
-            continue;
+        Cursor cursor(8);  // Crear cursor para 8 opciones
+        cursor.actualizarMenu(opciones, 8);
+
+        while (true) {
+            if (cursor.teclaPresionada()) {
+                char tecla = _getch();
+                if (tecla == 72) {  // Flecha arriba
+                    cursor.moverArriba();
+                    cursor.actualizarMenu(opciones, 8);
+                } else if (tecla == 80) {  // Flecha abajo
+                    cursor.moverAbajo();
+                    cursor.actualizarMenu(opciones, 8);
+                } else if (tecla == 13) {  // Enter
+                    opcion = cursor.getPosicion() + 1;
+                    break;
+                }
+            }
         }
 
         switch (opcion) {
@@ -177,7 +248,7 @@ void menuLibros(ListaLibros& listaLibros, ListaAutores& listaAutores) {
         cout << "Ingrese fecha de lanzamiento (MM/DD/AAAA): ";
         getline(cin, anioLanzamiento);
         if (!validarFecha(anioLanzamiento)) {
-            cout << "Error: Fecha invalida. Usa el formato MM/DD/AAAA.\n";
+           // cout << "Error: Fecha invalida. Usa el formato MM/DD/AAAA.\n";
         }
     } while (!validarFecha(anioLanzamiento));
 
@@ -189,14 +260,15 @@ void menuLibros(ListaLibros& listaLibros, ListaAutores& listaAutores) {
     } while (!validarPrecio(precio));
 
     do {
-        cout << "Ingrese calificación (0-10): ";
+        cout << "Ingrese calificacion (0-10): ";
         if (!ingresarNumero(calificacion) || !validarCalificacion(calificacion)) {
-            cout << "Error: La calificación debe ser entre 0 y 10.\n";
+            cout << "Error: La calificacion debe ser entre 0 y 10.\n";
         }
     } while (!validarCalificacion(calificacion));
 
-    listaLibros.insertar(titulo, autor, isbn, anioLanzamiento, genero, precio, calificacion);
+    listaLibros.insertar(titulo, autor, isbn, genero, anioLanzamiento, precio, calificacion);
     cout << "Libro ingresado exitosamente.\n";
+    system("pause");
     break;
 
         }
@@ -216,6 +288,7 @@ void menuLibros(ListaLibros& listaLibros, ListaAutores& listaAutores) {
             } else {
                 cout << "Libro no encontrado.\n";
             }
+            system("pause");
             break;
         }
         case 3: {
@@ -232,17 +305,49 @@ void menuLibros(ListaLibros& listaLibros, ListaAutores& listaAutores) {
              } else {
              cout << "El libro con ISBN " << isbn << " no se encontró en la lista.\n";
             }
+            system("pause");
             break;
         }
         case 4:
             listaLibros.mostrar();
-            break;
-        case 5:
-            cout << "Volviendo al menu principal...\n";
             system("pause");
             break;
+        case 5:
+            {
+            GenerarPDFLibros generadorPDF(listaLibros);
+            // Generar el archivo PDF con los libros
+            generadorPDF.generarPDF("libros_lista.pdf");
+            }
+            system("pause");
+            break;
+        case 6:
+                listaLibros.crearBackup(); // Crear backup
+                system("pause");
+                break;
+            case 7: {
+                std::vector<std::string> backupsLibros = BackupManager::listarArchivosEnCarpeta("BackupLibros");
+        if (backupsLibros.empty()) {
+        std::cout << "No hay backups disponibles en la carpeta 'BackupLibros'.\n";
+        } else {
+        std::cout << "Backups disponibles en 'BackupLibros':\n";
+        for (const auto& archivo : backupsLibros) {
+        std::cout << "- " << archivo << "\n";
         }
-    } while (opcion != 5);
+        std::cout << "Ingrese el nombre del archivo de backup a restaurar: ";
+        std::string nombreBackup;
+        std::cin >> nombreBackup;
+        // Intentar restaurar el backup
+        listaLibros.restaurarBackup(nombreBackup);
+    }
+    system("pause");
+    break;
+            }
+            case 8:
+                cout << "Volviendo al menu principal...\n";
+                system("pause");
+                break;
+        }
+    } while (opcion != 8);
 }
 
 int main() {
@@ -257,20 +362,30 @@ int main() {
 
     do {
         system("cls");
-        cout << "*****************************************************************************";
-        cout << "\n\t\t\t\t MENU PRINCIPAL \t\t\t\t\n";
-         cout << "*****************************************************************************\n";
-        cout << "1. Manejar Autores\n";
-        cout << "2. Manejar Libros\n";
-        cout << "3. Ayuda\n";
-        cout << "4. Salir\n";
-        cout << "\n";
-        cout << "Ingrese una opcion: ";
-        ingresarOpcionMenu(opcionMenu);
+        string opciones[] = {
+            "1. Manejar Autores",
+            "2. Manejar Libros",
+            "3. Ayuda",
+            "4. Salir"
+        };
 
-        if (!validarOpcionMenu(opcionMenu, 1, 3)) {
-            cout << "Opcion no valida. Intente de nuevo.\n";
-            continue;
+        Cursor cursor(4);  // Crear cursor para 4 opciones
+        cursor.actualizarMenu(opciones, 4);
+
+        while (true) {
+            if (cursor.teclaPresionada()) {
+                char tecla = _getch();
+                if (tecla == 72) {  // Flecha arriba
+                    cursor.moverArriba();
+                    cursor.actualizarMenu(opciones, 4);
+                } else if (tecla == 80) {  // Flecha abajo
+                    cursor.moverAbajo();
+                    cursor.actualizarMenu(opciones, 4);
+                } else if (tecla == 13) {  // Enter
+                    opcionMenu = cursor.getPosicion() + 1;
+                    break;
+                }
+            }
         }
 
         switch (opcionMenu) {
@@ -285,6 +400,7 @@ int main() {
             break;
         case 4:
             cout << "Saliendo...\n";
+            system("pause");
             break;
         }
 
