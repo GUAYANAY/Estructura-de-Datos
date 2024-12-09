@@ -258,11 +258,13 @@
 	"NodoLibros.h"
 	<iostream>
 
-1733550901 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\validaciones.cpp
+1733715862 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\validaciones.cpp
 	"Validaciones.h"
 	<regex>
 	<iostream>
 	<limits>
+	<ctime>
+	<string>
 
 1733646436 c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\ventanaayuda.h
 	<windows.h>
