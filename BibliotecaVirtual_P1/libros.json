@@ -1,45 +1,45 @@
 [
     {
-        "anioLanzamiento": "asdas",
+        "anioLanzamiento": "12/09/2003",
         "autor": "mariela lema",
         "calificacion": 5.0,
-        "genero": "12/09/2003",
+        "genero": "asdas",
         "isbn": "12",
         "precio": 45.0,
         "titulo": "eon"
     },
     {
-        "anioLanzamiento": "asd",
+        "anioLanzamiento": "12/09/2003",
         "autor": "mariela lema",
         "calificacion": 8.0,
-        "genero": "12/09/2003",
+        "genero": "asd",
         "isbn": "18",
         "precio": 24.0,
         "titulo": "leon"
     },
     {
-        "anioLanzamiento": "12/09/2024",
+        "anioLanzamiento": "sdas",
         "autor": "mariela lema",
         "calificacion": 5.0,
-        "genero": "sdas",
+        "genero": "12/09/2024",
         "isbn": "534",
         "precio": 14.0,
         "titulo": "dasd"
     },
     {
-        "anioLanzamiento": "aventura",
+        "anioLanzamiento": "12/09/2024",
         "autor": "Kerly guayanay",
         "calificacion": 9.0,
-        "genero": "12/09/2024",
+        "genero": "aventura",
         "isbn": "126",
         "precio": 14.0,
         "titulo": "Principito"
     },
     {
-        "anioLanzamiento": "aventura",
+        "anioLanzamiento": "12/09/2024",
         "autor": "erika guayanay",
         "calificacion": 5.0,
-        "genero": "12/09/2024",
+        "genero": "aventura",
         "isbn": "125",
         "precio": 12.0,
         "titulo": "Rey"

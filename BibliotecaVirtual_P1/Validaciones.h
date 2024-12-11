@@ -4,6 +4,7 @@ using namespace std;
 
 bool validarCedula(const string& cedula);
 bool validarTexto(const string& texto);
+bool esBisiesto(int anio);
 bool validarFecha(const string& fecha);
 bool validarEntero(const string& numero);
 bool validarFlotante(const string& numero);

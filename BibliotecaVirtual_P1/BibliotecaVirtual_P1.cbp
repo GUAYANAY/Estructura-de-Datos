@@ -43,6 +43,8 @@
 		<Unit filename="BackupManager.h" />
 		<Unit filename="Cursor.cpp" />
 		<Unit filename="Cursor.h" />
+		<Unit filename="FileUtils.cpp" />
+		<Unit filename="FileUtils.h" />
 		<Unit filename="GenerarPDFAutores.cpp" />
 		<Unit filename="GenerarPDFAutores.h" />
 		<Unit filename="GenerarPDFLibros.cpp" />
@@ -59,6 +61,7 @@
 		<Unit filename="Validaciones.h" />
 		<Unit filename="VentanaAyuda.cpp" />
 		<Unit filename="VentanaAyuda.h" />
+		<Unit filename="dirent.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

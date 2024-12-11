@@ -55,11 +55,19 @@ void menuAutores(ListaAutores& listaAutores) {
        case 1: {
            string cedula, nombre, apellido, fechaPublicacion;
            while (true) {
-                cout << "Ingrese la cedula: ";
-                cin >> cedula;
-                if (validarCedula(cedula)) break;
-                cout << "Error: La cedula ingresada no es valida\n";
-                }
+    cout << "Ingrese la cedula: ";
+    cin >> cedula;
+
+    if (!validarCedula(cedula)) {
+        cout << "Error: La cedula ingresada no es valida. Intente de nuevo.\n";
+        continue;
+    }
+    if (listaAutores.buscar(cedula)) {
+        cout << "Error: El autor con cedula " << cedula << " ya existe. Ingrese una cedula diferente.\n";
+    } else {
+        break;
+    }
+}
           while (true) {
         cout << "Ingrese nombre: ";
         cin >> nombre;

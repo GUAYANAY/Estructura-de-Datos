@@ -29,11 +29,16 @@ bool validarTexto(const string& texto) {
     return regex_match(texto, regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"));
 }
 
+
+bool esBisiesto(int anio) {
+    return (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
+}
+
 bool validarFecha(const string& fecha) {
     // Expresión regular para el formato MM/DD/YYYY
     regex formato("^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/[0-9]{4}$");
     if (!regex_match(fecha, formato)) {
-        cerr << "Error: Formato de fecha inválido. Use MM/DD/YYYY." << endl;
+        cerr << "Error: Formato de fecha invalido. Use MM/DD/YYYY." << endl;
         return false;
     }
 
@@ -49,21 +54,25 @@ bool validarFecha(const string& fecha) {
 
     // Validar rango del año
     if (anio < 1700 || anio > anioActual) {
-        cerr << "Error: El año debe estar entre 1700 y " << anioActual << "." << endl;
+        cerr << "Error: La fecha debe estar entre 1700 y " << anioActual << "." << endl;
         return false;
     }
 
     // Validar días según el mes (sin considerar años bisiestos)
     int diasEnMes[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
+    // Si es un año bisiesto, ajustar el día máximo de febrero
+    if (mes == 2 && esBisiesto(anio)) {
+        diasEnMes[1] = 29; // febrero tiene 29 días en un año bisiesto
+    }
+
     if (dia < 1 || dia > diasEnMes[mes - 1]) {
-        cerr << "Error: El día no es válido para el mes especificado." << endl;
+        cerr << "Error: El dia no es valido para el mes especificado." << endl;
         return false;
     }
 
     return true;
 }
-
 
 bool validarEntero(const string& numero) {
     return regex_match(numero, regex("^-?\\d+$"));

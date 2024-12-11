@@ -98,11 +98,36 @@ BT
 50 500 Td
 (--------------------------------------------) Tj
 ET
+BT
+/F1 12 Tf
+50 480 Td
+(Cedula: 0201655842) Tj
+ET
+BT
+/F1 12 Tf
+50 460 Td
+(Nombre: mariela) Tj
+ET
+BT
+/F1 12 Tf
+50 440 Td
+(Apellido: lema) Tj
+ET
+BT
+/F1 12 Tf
+50 420 Td
+(Fecha de Publicacion: 11\05712\0572004) Tj
+ET
+BT
+/F1 10 Tf
+50 390 Td
+(--------------------------------------------) Tj
+ET
 
 endstream
 endobj
 6 0 obj
-714
+1003
 endobj
 7 0 obj
 <<
@@ -120,8 +145,8 @@ xref
 0000000123 00000 n
 0000000184 00000 n
 0000000370 00000 n
-0000001138 00000 n
-0000001157 00000 n
+0000001427 00000 n
+0000001447 00000 n
 trailer
 <<
 /Root 1 0 R
@@ -129,5 +154,5 @@ trailer
 /Size 8
 >>
 startxref
-1255
+1545
 %%EOF

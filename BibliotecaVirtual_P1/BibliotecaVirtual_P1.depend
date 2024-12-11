@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1733712129 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\listaautores.cpp
+1733730632 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\listaautores.cpp
 	"ListaAutores.h"
 	"Validaciones.h"
 	<iostream>
@@ -213,7 +213,7 @@
 	<any>
 	<string_view>
 
-1733551236 c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\validaciones.h
+1733811168 c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\validaciones.h
 	<string>
 
 1733712218 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\listalibros.cpp
@@ -238,7 +238,7 @@
 1733540880 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\nodoautores.cpp
 	"NodoAutores.h"
 
-1733713525 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\main.cpp
+1733716511 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\main.cpp
 	"ListaAutores.h"
 	"ListaLibros.h"
 	"Validaciones.h"
@@ -253,6 +253,8 @@
 	<conio.h>
 	"BackupManager.h"
 	"FileUtils.h"
+	<ctime>
+	<string>
 
 1733712764 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\nodolibros.cpp
 	"NodoLibros.h"
@@ -269,7 +271,7 @@
 1733646436 c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\ventanaayuda.h
 	<windows.h>
 
-1733649293 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\ventanaayuda.cpp
+1733717884 source:c:\users\primario\documents\codeblocks_vanne\bibliotecavirtual_p1\ventanaayuda.cpp
 	"VentanaAyuda.h"
 	<sstream>
 	<iostream>
