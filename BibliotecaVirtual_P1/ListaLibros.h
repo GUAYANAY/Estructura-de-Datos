@@ -2,6 +2,7 @@
 #include "NodoLibros.h"
 #include "ListaAutores.h"
 #include <string>
+#include <regex>
 #include <fstream>
 #include "json.hpp" // Aseg�rate de que esta ruta sea correcta
 
@@ -20,6 +21,7 @@ public:
     bool insertar(string titulo, string autor, string isbn, string genero, string anioLanzamiento, float precio, float calificacion);
     NodoLibros* buscar(string isbn);
     bool eliminar(string isbn);
+    void filtrarPorAnio();
     void mostrar();
 
     // Funciones para manejar JSON

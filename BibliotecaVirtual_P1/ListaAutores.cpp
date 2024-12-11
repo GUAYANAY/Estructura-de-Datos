@@ -147,7 +147,14 @@ void ListaAutores::cargarDesdeArchivoJSON() {
     }
 
 }
+
 void ListaAutores::crearBackup() {
+    // Verificar si hay datos para respaldar
+    if (!cabeza) {
+        cout << "No hay datos para hacer el backup.\n";
+        return;
+    }
+
     // Generar nombre con fecha y hora
     auto now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     tm localTime;
@@ -180,6 +187,7 @@ void ListaAutores::crearBackup() {
     cout << "Backup creado exitosamente: " << buffer << "\n";
 }
 
+
 void ListaAutores::restaurarBackup(const std::string& nombreArchivo) {
     std::ifstream archivo("BackupAutores/" + nombreArchivo); // Leer desde la carpeta BackupAutores
     if (!archivo.is_open()) {
@@ -190,6 +198,12 @@ void ListaAutores::restaurarBackup(const std::string& nombreArchivo) {
     json jAutores;
     archivo >> jAutores; // Leer el contenido del archivo JSON
     archivo.close();
+
+    // Comprobar si el backup est� vac�o
+    if (jAutores.empty()) {
+        std::cout << "No existe nada en el backup.\n";
+        return;
+    }
 
     // Liberar memoria de la lista actual (si existe)
     if (cabeza) {

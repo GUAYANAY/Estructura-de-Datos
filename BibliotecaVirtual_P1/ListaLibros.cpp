@@ -2,10 +2,12 @@
 #include "BackupManager.h"
 #include <iostream>
 #include <fstream>
+#include <regex>
 #include <sstream>
 #include <chrono> // Necesario para trabajar con std::chrono
 #include "json.hpp"
 #include <iomanip>
+#include <conio.h> // Para getch()
 using json = nlohmann::json;
 
 ListaLibros::ListaLibros() : cabeza(nullptr) {}
@@ -222,6 +224,12 @@ string ListaLibros::seleccionarAutor(ListaAutores& listaAutores) {
 
 
 void ListaLibros::crearBackup() {
+    // Verificar si la lista está vacía
+    if (!cabeza) {
+        cout << "No hay datos para hacer el backup.\n";
+        return;
+    }
+
     // Generar nombre con fecha y hora
     auto now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     tm localTime;
@@ -257,6 +265,7 @@ void ListaLibros::crearBackup() {
     cout << "Backup creado exitosamente: " << buffer << "\n";
 }
 
+
 void ListaLibros::restaurarBackup(const string& nombreArchivo) {
     ifstream archivo("BackupLibros/" + nombreArchivo); // Leer desde la carpeta BackupLibros
     if (!archivo.is_open()) {
@@ -267,6 +276,12 @@ void ListaLibros::restaurarBackup(const string& nombreArchivo) {
     json jLibros;
     archivo >> jLibros;
     archivo.close();
+
+    // Comprobar si el archivo está vacío
+    if (jLibros.empty()) {
+        cout << "No existe nada en el backup.\n";
+        return;
+    }
 
     // Liberar memoria de la lista actual (si existe)
     if (cabeza) {
@@ -305,4 +320,105 @@ void ListaLibros::restaurarBackup(const string& nombreArchivo) {
     }
 
     cout << "Backup restaurado correctamente desde " << nombreArchivo << ".\n";
+}
+
+void ListaLibros::filtrarPorAnio() {
+    string inputInicio, inputFinal;
+    int anioInicio = 0, anioFinal = 0;
+
+    // Lambda para validar si un string tiene exactamente 4 dígitos
+    auto esAnioValido = [](const string& str) -> bool {
+        return str.length() == 4 && std::regex_match(str, std::regex("\\d{4}"));
+    };
+
+    // Función para capturar entrada numérica con getch() y verificar longitud
+    auto capturarEntrada = []() -> string {
+        string entrada;
+        char ch;
+
+        while (true) {
+            ch = getch();
+            if (ch == '\r') { // Enter (fin de entrada)
+                if (entrada.length() == 4) break; // Solo permitir exactamente 4 dígitos
+                else {
+                    cout << "\nError: Debe ingresar exactamente 4 digitos.\n";
+                    entrada.clear(); // Reiniciar entrada si es incorrecta
+                    cout << "Ingrese nuevamente: ";
+                }
+            } else if (ch == '\b') { // Backspace
+                if (!entrada.empty()) {
+                    entrada.pop_back();
+                    cout << "\b \b"; // Borrar en pantalla
+                }
+            } else if (isdigit(ch) && entrada.length() < 4) { // Permitir números, máximo 4 caracteres
+                entrada += ch;
+                cout << ch; // Mostrar el número en pantalla
+            }
+        }
+        return entrada;
+    };
+
+    // Solicitar y validar el rango de años
+    while (true) {
+        cout << "Ingrese la fecha inicial: ";
+        inputInicio = capturarEntrada();
+        cout << endl;
+
+        if (!esAnioValido(inputInicio)) {
+            cout << "Error: Fecha invalida. Debe tener exactamente 4 digitos.\n";
+            continue;
+        } else {
+            anioInicio = stoi(inputInicio);
+        }
+
+        cout << "Ingrese la fecha final: ";
+        inputFinal = capturarEntrada();
+        cout << endl;
+
+        if (!esAnioValido(inputFinal)) {
+            cout << "Error: Fecha invalido. Debe tener exactamente 4 digitos.\n";
+            continue;
+        } else {
+            anioFinal = stoi(inputFinal);
+            if (anioFinal >= anioInicio) {
+                break; // Validación exitosa
+            } else {
+                cout << "Error: La fecha final debe ser mayor o igual a la fecha inicial.\n";
+            }
+        }
+    }
+
+    // Filtrar los libros en el rango de años
+    vector<NodoLibros*> librosFiltrados;
+
+    NodoLibros* actual = getCabeza();
+    if (!actual) {
+        cout << "La lista de libros esta vacia.\n";
+        return;
+    }
+
+    do {
+        string fecha = actual->getAnioLanzamiento();
+        if (fecha.length() >= 10) { // Asegurarse de que la fecha tenga el formato correcto
+            string anioStr = fecha.substr(6, 4); // Extraer el año desde MM/DD/AAAA
+            int anioLanzamiento = stoi(anioStr);
+
+            if (anioLanzamiento >= anioInicio && anioLanzamiento <= anioFinal) {
+                librosFiltrados.push_back(actual);
+            }
+        }
+        actual = actual->getSiguiente();
+    } while (actual != getCabeza());
+
+    // Mostrar los libros filtrados
+    if (librosFiltrados.empty()) {
+        cout << "No se encontraron libros en la fecha ingresada.\n";
+    } else {
+        cout << "Libros en el rango " << anioInicio << " - " << anioFinal << ":\n";
+        for (NodoLibros* libro : librosFiltrados) {
+            cout << "Titulo: " << libro->getTitulo()
+                 << ", Autor: " << libro->getAutor()
+                 << ", Fecha: " << libro->getAnioLanzamiento() << "\n";
+        }
+    }
 }
