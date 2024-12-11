@@ -26,44 +26,43 @@ bool validarCedula(const string& cedula) {
 }
 
 bool validarTexto(const string& texto) {
-    return regex_match(texto, regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"));
+    return regex_match(texto, regex("^[a-zA-Zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ]+$"));
 }
-
 
 bool esBisiesto(int anio) {
     return (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
 }
 
 bool validarFecha(const string& fecha) {
-    // Expresión regular para el formato MM/DD/YYYY
+    // ExpresiÃ³n regular para el formato MM/DD/YYYY
     regex formato("^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/[0-9]{4}$");
     if (!regex_match(fecha, formato)) {
         cerr << "Error: Formato de fecha invalido. Use MM/DD/YYYY." << endl;
         return false;
     }
 
-    // Extraer mes, día y año de la cadena
+    // Extraer mes, dÃ­a y aÃ±o de la cadena
     int mes = stoi(fecha.substr(0, 2));
     int dia = stoi(fecha.substr(3, 2));
     int anio = stoi(fecha.substr(6, 4));
 
-    // Obtener el año actual
+    // Obtener el aÃ±o actual
     time_t t = time(nullptr);
     tm* fechaActual = localtime(&t);
     int anioActual = fechaActual->tm_year + 1900;
 
-    // Validar rango del año
+    // Validar rango del aÃ±o
     if (anio < 1700 || anio > anioActual) {
         cerr << "Error: La fecha debe estar entre 1700 y " << anioActual << "." << endl;
         return false;
     }
 
-    // Validar días según el mes (sin considerar años bisiestos)
+    // Validar dÃ­as segÃºn el mes (sin considerar aÃ±os bisiestos)
     int diasEnMes[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    // Si es un año bisiesto, ajustar el día máximo de febrero
+    // Si es un aÃ±o bisiesto, ajustar el dÃ­a mÃ¡ximo de febrero
     if (mes == 2 && esBisiesto(anio)) {
-        diasEnMes[1] = 29; // febrero tiene 29 días en un año bisiesto
+        diasEnMes[1] = 29; // febrero tiene 29 dÃ­as en un aÃ±o bisiesto
     }
 
     if (dia < 1 || dia > diasEnMes[mes - 1]) {
@@ -95,48 +94,48 @@ bool validarCalificacion(double calificacion) {
 }
 
 bool validarISBN(const std::string& isbn) {
-    return std::regex_match(isbn, std::regex("[0-9-]+"));
+     return std::regex_match(isbn, std::regex("[0-9]+(-[0-9]+)*"));
 }
 
-// Función para ingresar números enteros (por ejemplo, año)
+// Funciï¿½n para ingresar nï¿½meros enteros (por ejemplo, aï¿½o)
 bool ingresarNumero(int& numero) {
     while (true) {
         cin >> numero;
-        if (cin.fail()) { // Si la entrada no es un número
+        if (cin.fail()) { // Si la entrada no es un nï¿½mero
             cin.clear(); // Limpiar el error
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar caracteres no válidos
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar caracteres no vï¿½lidos
             cout << "Error: Ingresa un numero valido.\n";
         } else {
-            return true; // Entrada válida
+            return true; // Entrada vï¿½lida
         }
     }
 }
 
-// Función para ingresar números decimales (por ejemplo, precio o calificación)
+// Funciï¿½n para ingresar nï¿½meros decimales (por ejemplo, precio o calificaciï¿½n)
 bool ingresarNumero(double& numero) {
     while (true) {
         cin >> numero;
-        if (cin.fail()) { // Si la entrada no es un número
+        if (cin.fail()) { // Si la entrada no es un nï¿½mero
             cin.clear(); // Limpiar el error
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar caracteres no válidos
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar caracteres no vï¿½lidos
             cout << "Error: Ingresa un numero valido.\n";
         } else {
-            return true; // Entrada válida
+            return true; // Entrada vï¿½lida
         }
     }
 }
 
-// Función para ingresar y validar la opción seleccionada en el menú
+// Funciï¿½n para ingresar y validar la opciï¿½n seleccionada en el menï¿½
 bool ingresarOpcionMenu(int& opcion) {
     while (true) {
         cin >> opcion;
-        if (cin.fail()) { // Si la entrada no es un número
+        if (cin.fail()) { // Si la entrada no es un nï¿½mero
             cin.clear(); // Limpiar el error
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar caracteres no válidos
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar caracteres no vï¿½lidos
             cout << "Error: Ingresa una opcion valida.\n";
              cout << "Vuelve a intentarlo por favor:";
         } else {
-            return true; // Entrada válida
+            return true; // Entrada vï¿½lida
         }
     }
 }
