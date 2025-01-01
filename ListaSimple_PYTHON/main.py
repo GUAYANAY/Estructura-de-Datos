@@ -13,7 +13,7 @@ def main():
     lista_principal.cargar_desde_archivo("personas.txt")
 
     while True:
-        
+        os.system("cls" if os.name == "nt" else "clear")
         print("** Menu de opciones **")
         print("1. Insertar persona")
         print("2. Buscar persona")
@@ -89,12 +89,15 @@ def main():
             cedula = capturar_cedula()
             if not validar_cedula_real(cedula):
                 print("Cedula invalida. Intente de nuevo.")
+                input("Presione Enter para continuar...")
                 continue
             if not lista_principal.buscar(cedula):
                 print("Error: Persona no encontrada.")
+                input("Presione Enter para continuar...")
                 continue
             caracter = capturar_una_letra()
             lista_principal.eliminar_caracter(cedula, caracter, lista_auxiliar)
+            input("Presione Enter para continuar...")
             continue  # Volver al menú principal después de eliminar el carácter
             
 
@@ -102,13 +105,16 @@ def main():
             cedula = capturar_cedula()
             if not validar_cedula_real(cedula):
                 print("Cedula invalida. Intente de nuevo.")
+                input("Presione Enter para continuar...")
                 continue
             if not lista_principal.buscar(cedula):
                 print("Error: Persona no encontrada.")
+                input("Presione Enter para continuar...")
                 continue
             caracter = capturar_una_letra()
             desplazamiento = validar_numero_1a25()
             lista_principal.cifrar_caracter(cedula, caracter, desplazamiento, lista_auxiliar)
+            input("Presione Enter para continuar...")
             continue  # Volver al menú principal después de cifrar el carácter
             
 
@@ -135,6 +141,8 @@ def main():
 
         else:
             print("Opcion invalida. Intente de nuevo.")
+
+        input("Presione Enter para continuar...")
             
 
 if __name__ == "__main__":
