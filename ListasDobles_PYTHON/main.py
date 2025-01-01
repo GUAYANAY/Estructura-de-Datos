@@ -96,13 +96,12 @@ def main():
             lista_principal.mostrar()
 
         elif opcion == 5:
-            while True:
-                print("Ingrese cedula: ")
-                cedula = capturar_solo_numeros_bloqueado()
-                if not validar_cedula_real(cedula):
-                    print("Cedula invalida. Intente de nuevo.")
-                else:
-                    break
+            print("Ingrese cedula: ")
+            cedula = capturar_solo_numeros_bloqueado()
+            if not validar_cedula_real(cedula):
+                print("Cedula invalida. Intente de nuevo.")
+                input("Presione Enter para continuar...")
+                continue
             if not lista_principal.buscar(cedula):
                 print("Error: Persona no encontrada.")
                 input("Presione Enter para continuar...")
@@ -111,15 +110,16 @@ def main():
             print("Ingrese caracter a eliminar: ")
             caracter = capturar_una_letra_bloqueado()
             lista_principal.eliminar_caracter(cedula, caracter, lista_auxiliar)
+            input("Presione Enter para continuar...")
+            continue
 
         elif opcion == 6:
-            while True:
-                print("Ingrese cedula: ")
-                cedula = capturar_solo_numeros_bloqueado()
-                if not validar_cedula_real(cedula):
-                    print("Cedula invalida. Intente de nuevo.")
-                else:
-                    break
+            print("Ingrese cedula: ")
+            cedula = capturar_solo_numeros_bloqueado()
+            if not validar_cedula_real(cedula):
+                print("Cedula invalida. Intente de nuevo.")
+                input("Presione Enter para continuar...")
+                continue
             if not lista_principal.buscar(cedula):
                 print("Error: Persona no encontrada.")
                 input("Presione Enter para continuar...")
@@ -128,8 +128,10 @@ def main():
             print("Ingrese caracter a cifrar: ")
             caracter = capturar_una_letra_bloqueado()
             print("\nIngrese desplazamiento: ")
-            desplazamiento = capturar_numero_1_a_25_bloqueado()
+            desplazamiento = capturar_numero_1_a_9_bloqueado()
             lista_principal.cifrar_caracter(cedula, caracter, desplazamiento, lista_auxiliar)
+            input("Presione Enter para continuar...")
+            continue
 
         elif opcion == 7:
             lista_auxiliar.mostrar()

@@ -41,14 +41,14 @@ def validar_cedula_unica(cedula):
         return False
     return True
 
+def validar_solo_letras(texto):
+    return all(c.isalpha() or c.isspace() for c in texto)
 def registrar_cedula(cedula):
     cedulas_registradas.add(cedula)
 
 def eliminar_cedula(cedula):
     cedulas_registradas.discard(cedula)
 
-def validar_solo_letras(texto):
-    return all(c.isalpha() or c.isspace() for c in texto)
 
 def existe_cedula(cedula):
     return cedula in cedulas_registradas
@@ -69,8 +69,6 @@ def capturar_solo_numeros_bloqueado():
             print(tecla.decode(), end="", flush=True)
         elif tecla == b'\r':  # Enter key
             if entrada == "":
-                print("\nError: Debe completar la información solicitada.\n")
-                print("Intente de nuevo:")
                 continue
             print()
             return entrada
@@ -78,13 +76,6 @@ def capturar_solo_numeros_bloqueado():
             if len(entrada) > 0:
                 entrada = entrada[:-1]
                 print("\b \b", end="", flush=True)
-
-def capturar_solo_letras():
-    while True:
-        entrada = input()
-        if validar_solo_letras(entrada):
-            return entrada
-        print("Error: Debe ingresar solo letras.")
 
 def capturar_solo_letras_bloqueado():
     entrada = ""
@@ -95,9 +86,7 @@ def capturar_solo_letras_bloqueado():
             print(tecla.decode(), end="", flush=True)
         elif tecla == b'\r':  # Enter key
             if entrada == "":
-                print("\nError: Debe completar la información solicitada.")
-                print("\nIntente de nuevo:")
-                continue
+                continue  # Do not allow to proceed if input is empty
             print()
             return entrada
         elif tecla == b'\x08':  # Backspace key
@@ -132,8 +121,7 @@ def capturar_una_letra_bloqueado():
                 print(tecla.decode(), end="", flush=True)
             elif tecla == b'\r':  # Enter key
                 if entrada == "":
-                    print("\nError: Debe ingresar una letra.")
-                    break
+                    continue
                 print()
                 return entrada
             elif tecla == b'\x08':  # Backspace key
@@ -141,31 +129,24 @@ def capturar_una_letra_bloqueado():
                     entrada = entrada[:-1]
                     print("\b \b", end="", flush=True)
 
-def validar_numero_1_a_25():
-    while True:
-        entrada = input("Ingrese un numero entre 1 y 25: ")
-        if entrada.isdigit():
-            numero = int(entrada)
-            if 1 <= numero <= 25:
-                return numero
-        print("Error: Debe ingresar un numero entre 1 y 25.")
-
-def capturar_numero_1_a_25_bloqueado():
+def capturar_numero_1_a_9_bloqueado():
     while True:
         entrada = ""
-        print("Ingrese un numero entre 1 y 25: ", end="", flush=True)
         while True:
             tecla = msvcrt.getch()
-            if tecla.isdigit():
+            if tecla.isdigit() and len(entrada) < 1 and tecla != b'0':  # Allow only up to 1 digit and block 0
                 entrada += tecla.decode()
                 print(tecla.decode(), end="", flush=True)
-            elif tecla == b'\r':  # Enter key
-                if entrada == "" or not (1 <= int(entrada) <= 25):
-                    print("\nError: Debe ingresar un numero entre 1 y 25.")
-                    break
+            elif tecla == b'\r':
+                if entrada == "":
+                    continue
+                if not (1 <= int(entrada) <= 9):
+                    print("\nError: El número debe estar entre 1 y 9.")
+                    entrada = ""
+                    continue
                 print()
                 return int(entrada)
-            elif tecla == b'\x08':  # Backspace key
+            elif tecla == b'\x08':
                 if len(entrada) > 0:
                     entrada = entrada[:-1]
                     print("\b \b", end="", flush=True)

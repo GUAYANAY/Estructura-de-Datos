@@ -91,21 +91,6 @@ class ListaDoble:
         os.rename("personas_temp.txt", "personas.txt")
         return True
 
-    def actualizar_archivo(self, cedula, nuevo_nombre=None, nuevo_apellido=None):
-        try:
-            with open("personas.txt", "r") as archivo_entrada, open("personas_temp.txt", "w") as archivo_temporal:
-                for linea in archivo_entrada:
-                    archivo_cedula, nombre, apellido = linea.strip().split(',')
-                    if archivo_cedula == cedula:
-                        if nuevo_nombre and nuevo_apellido:
-                            archivo_temporal.write(f"{archivo_cedula},{nuevo_nombre},{nuevo_apellido}\n")
-                    else:
-                        archivo_temporal.write(linea)
-            os.remove("personas.txt")
-            os.rename("personas_temp.txt", "personas.txt")
-        except FileNotFoundError:
-            print("Error al abrir los archivos.")
-
     def eliminar_caracter(self, cedula, caracter, lista_auxiliar):
         temp = self.buscar(cedula)
         if not temp:
@@ -123,14 +108,42 @@ class ListaDoble:
         temp = self.buscar(cedula)
         if not temp:
             return
-        cifrar = lambda c: chr((ord(c) - ord('a') + desplazamiento) % 26 + ord('a')) if c == caracter and c.isalpha() else c
-        nuevo_nombre = ''.join(cifrar(c) for c in temp.get_nombre())
-        nuevo_apellido = ''.join(cifrar(c) for c in temp.get_apellido())
+        
+        nombre = temp.get_nombre()
+        apellido = temp.get_apellido()
+        
+        if caracter.lower() not in nombre.lower() and caracter.lower() not in apellido.lower():
+            print("Caracter no encontrado en el nombre o apellido.")
+            return
+        
+        def cifrar(c, desplazamiento):
+            if c.isalpha():
+                base = ord('A') if c.isupper() else ord('a')
+                return chr((ord(c) - base + desplazamiento) % 26 + base)
+            return c
+
+        nuevo_nombre = ''.join(cifrar(c, desplazamiento) if c.lower() == caracter.lower() else c for c in nombre)
+        nuevo_apellido = ''.join(cifrar(c, desplazamiento) if c.lower() == caracter.lower() else c for c in apellido)
         temp.set_nombre(nuevo_nombre)
         temp.set_apellido(nuevo_apellido)
         lista_auxiliar.insertar(temp.get_cedula(), nuevo_nombre, nuevo_apellido)
         self.actualizar_archivo(cedula, nuevo_nombre, nuevo_apellido)
         print(f"Caracter cifrado correctamente con desplazamiento {desplazamiento}. Archivo actualizado y lista auxiliar actualizada.")
+
+    def actualizar_archivo(self, cedula, nuevo_nombre=None, nuevo_apellido=None):
+        try:
+            with open("personas.txt", "r") as archivo_entrada, open("personas_temp.txt", "w") as archivo_temporal:
+                for linea in archivo_entrada:
+                    archivo_cedula, nombre, apellido = linea.strip().split(',')
+                    if archivo_cedula == cedula:
+                        if nuevo_nombre and nuevo_apellido:
+                            archivo_temporal.write(f"{archivo_cedula},{nuevo_nombre},{nuevo_apellido}\n")
+                    else:
+                        archivo_temporal.write(linea)
+            os.remove("personas.txt")
+            os.rename("personas_temp.txt", "personas.txt")
+        except FileNotFoundError:
+            print("Error al abrir los archivos.")
 
     def guardar_en_archivo(self, cedula, nombre, apellido, nombre_archivo):
         with open(nombre_archivo, "a") as archivo:
