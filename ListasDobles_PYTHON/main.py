@@ -1,3 +1,13 @@
+"""
+***********************************************************************
+* UNIVERSIDAD DE LAS FUERZAS ARMADAS "ESPE"
+* ALUMNOS:  Erika Guayanay
+* FECHA ENTREGA: 06 de enero de 2025
+* PROGRAMA: Listas Circulares en python.
+* NRC: 1992
+***********************************************************************
+"""
+
 from ListasDoble import ListaDoble
 from Validaciones import *
 from MetodoOrdenamientoExterno import MetodoOrdenamientoExterno
@@ -128,7 +138,7 @@ def main():
             print("Ingrese caracter a cifrar: ")
             caracter = capturar_una_letra_bloqueado()
             print("\nIngrese desplazamiento: ")
-            desplazamiento = capturar_numero_1_a_9_bloqueado()
+            desplazamiento = capturar_numero_1_a_25_bloqueado()
             lista_principal.cifrar_caracter(cedula, caracter, desplazamiento, lista_auxiliar)
             input("Presione Enter para continuar...")
             continue

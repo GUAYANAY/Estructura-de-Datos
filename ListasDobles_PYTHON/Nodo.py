@@ -1,3 +1,13 @@
+"""
+***********************************************************************
+* UNIVERSIDAD DE LAS FUERZAS ARMADAS "ESPE"
+* ALUMNOS:  Erika Guayanay
+* FECHA ENTREGA: 06 de enero de 2025
+* PROGRAMA: Listas Circulares en python.
+* NRC: 1992
+***********************************************************************
+"""
+
 class Nodo:
     def __init__(self, cedula, nombre, apellido):
         self.cedula = cedula

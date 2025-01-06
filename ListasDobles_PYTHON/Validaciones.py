@@ -1,3 +1,13 @@
+"""
+***********************************************************************
+* UNIVERSIDAD DE LAS FUERZAS ARMADAS "ESPE"
+* ALUMNOS:  Erika Guayanay
+* FECHA ENTREGA: 06 de enero de 2025
+* PROGRAMA: Listas Circulares en python.
+* NRC: 1992
+***********************************************************************
+"""
+
 import re
 import msvcrt
 
@@ -129,21 +139,21 @@ def capturar_una_letra_bloqueado():
                     entrada = entrada[:-1]
                     print("\b \b", end="", flush=True)
 
-def capturar_numero_1_a_9_bloqueado():
+def capturar_numero_1_a_25_bloqueado():
     while True:
         entrada = ""
         while True:
             tecla = msvcrt.getch()
-            if tecla.isdigit() and len(entrada) < 1 and tecla != b'0':  # Allow only up to 1 digit and block 0
+            if tecla.isdigit() and len(entrada) < 2 and tecla != b'0':  # Allow only up to 2 digits and block 0
                 entrada += tecla.decode()
                 print(tecla.decode(), end="", flush=True)
             elif tecla == b'\r':
                 if entrada == "":
                     continue
-                if not (1 <= int(entrada) <= 9):
-                    print("\nError: El número debe estar entre 1 y 9.")
+                if not (1 <= int(entrada) <= 25):
+                    print("\nError: El número debe estar entre 1 y 25.")
                     entrada = ""
-                    continue
+                    break  # Break to allow re-entry
                 print()
                 return int(entrada)
             elif tecla == b'\x08':

@@ -1,21 +1,31 @@
+"""
+***********************************************************************
+* UNIVERSIDAD DE LAS FUERZAS ARMADAS "ESPE"
+* ALUMNOS:  Erika Guayanay
+* FECHA ENTREGA: 06 de enero de 2025
+* PROGRAMA: Listas Circulares en python.
+* NRC: 1992
+***********************************************************************
+"""
+
 import os
 
 class MetodoOrdenamientoExterno:
-    def distribuir_datos(self, archivo_entrada, archivos_salida):
+    def distribuir_datos(self, nombre_archivo, archivos_cubetas):
         try:
-            with open(archivo_entrada, "r") as archivo:
-                cubetas = [open(f"cubeta_{chr(65 + i)}.txt", "w") for i in range(26)]
+            with open(nombre_archivo, "r") as archivo:
+                cubetas = {}
                 for linea in archivo:
-                    cedula, nombre, apellido = linea.strip().split(',')
-                    if nombre:
-                        indice = ord(nombre[0].lower()) - ord('a')
-                        if 0 <= indice < 26:
-                            cubetas[indice].write(linea)
-                for cubeta in cubetas:
-                    cubeta.close()
-                archivos_salida.extend([f"cubeta_{chr(65 + i)}.txt" for i in range(26)])
+                    inicial = linea.strip().split(',')[1][0].lower()
+                    if inicial not in cubetas:
+                        cubetas[inicial] = open(f"cubeta_{inicial}.txt", "w")
+                        archivos_cubetas.append(f"cubeta_{inicial}.txt")
+                    cubetas[inicial].write(linea)
+                
+                for archivo in cubetas.values():
+                    archivo.close()
         except FileNotFoundError:
-            print("Error al abrir el archivo de entrada.")
+            print("Error al abrir el archivo.")
 
     def ordenar_archivo(self, nombre_archivo):
         try:
