@@ -1,19 +1,31 @@
+"""
+***********************************************************************
+* UNIVERSIDAD DE LAS FUERZAS ARMADAS "ESPE"
+* ALUMNOS:  Erika Guayanay
+* FECHA ENTREGA: 06 de enero de 2025
+* PROGRAMA: Listas Circulares en python.
+* NRC: 1992
+***********************************************************************
+"""
+
 import os
 
 class MetodoOrdenamientoExterno:
     def distribuir_datos(self, archivo_entrada, archivos_salida):
         try:
             with open(archivo_entrada, 'r') as archivo:
-                cubetas = [open(f"cubeta_{chr(65 + i)}.txt", 'w') for i in range(26)]
+                cubetas = {}
                 for linea in archivo:
                     cedula, nombre, apellido = linea.strip().split(',')
                     if nombre:
-                        indice = ord(nombre[0].lower()) - ord('a')
-                        if 0 <= indice < 26:
+                        indice = nombre[0].upper()
+                        if indice.isalpha():
+                            if indice not in cubetas:
+                                cubetas[indice] = open(f"cubeta_{indice}.txt", 'w')
                             cubetas[indice].write(linea)
-                for cubeta in cubetas:
+                for cubeta in cubetas.values():
                     cubeta.close()
-                archivos_salida.extend([f"cubeta_{chr(65 + i)}.txt" for i in range(26)])
+                archivos_salida.extend([f"cubeta_{indice}.txt" for indice in cubetas])
             print("Datos distribuidos correctamente en las cubetas.")
         except FileNotFoundError:
             print("Error al abrir el archivo de entrada.")

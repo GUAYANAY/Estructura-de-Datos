@@ -1,3 +1,13 @@
+"""
+***********************************************************************
+* UNIVERSIDAD DE LAS FUERZAS ARMADAS "ESPE"
+* ALUMNOS:  Erika Guayanay
+* FECHA ENTREGA: 06 de enero de 2025
+* PROGRAMA: Listas Circulares en python.
+* NRC: 1992
+***********************************************************************
+"""
+
 from lista_simple import ListaSimple
 from metodo_ordenamiento_externo import MetodoOrdenamientoExterno
 from validaciones import *
@@ -29,7 +39,8 @@ def main():
 
         if opcion == 1:
             while True:
-                cedula = capturar_cedula()
+                print("Ingrese cedula: ")
+                cedula = capturar_solo_numeros_bloqueado()
                 if not validar_cedula_real(cedula):
                     print("Cedula invalida. Intente de nuevo.")
                 elif not validar_cedula_unica(cedula):
@@ -37,14 +48,16 @@ def main():
                 else:
                     break
             while True:
-                nombre = capturar_solo_letras("Ingrese nombre: ")
+                print("Ingrese nombre: ")
+                nombre = capturar_solo_letras_bloqueado()
                 nombre = normalizar_nombre(nombre)
                 if not validar_solo_letras(nombre):
                     print("Error: El nombre debe contener solo letras. Intente nuevamente.")
                 else:
                     break
             while True:
-                apellido = capturar_solo_letras("Ingrese apellido: ")
+                print("Ingrese apellido: ")
+                apellido = capturar_solo_letras_bloqueado()
                 apellido = normalizar_nombre(apellido)
                 if not validar_solo_letras(apellido):
                     print("Error: El apellido debe contener solo letras. Intente nuevamente.")
@@ -58,7 +71,8 @@ def main():
 
         elif opcion == 2:
             while True:
-                cedula = capturar_cedula()
+                print("Ingrese cedula: ")
+                cedula = capturar_solo_numeros_bloqueado()
                 if not validar_cedula_real(cedula):
                     print("Cedula invalida. Intente de nuevo.")
                 else:
@@ -70,7 +84,8 @@ def main():
 
         elif opcion == 3:
             while True:
-                cedula = capturar_cedula()
+                print("Ingrese cedula: ")
+                cedula = capturar_solo_numeros_bloqueado()
                 if not validar_cedula_real(cedula):
                     print("Cedula invalida. Intente de nuevo.")
                 else:
@@ -86,7 +101,8 @@ def main():
             
 
         elif opcion == 5:
-            cedula = capturar_cedula()
+            print("Ingrese cedula: ")
+            cedula = capturar_solo_numeros_bloqueado()
             if not validar_cedula_real(cedula):
                 print("Cedula invalida. Intente de nuevo.")
                 input("Presione Enter para continuar...")
@@ -95,14 +111,16 @@ def main():
                 print("Error: Persona no encontrada.")
                 input("Presione Enter para continuar...")
                 continue
-            caracter = capturar_una_letra()
+            print("Ingrese un caracter: ")
+            caracter = capturar_una_letra_bloqueado()
             lista_principal.eliminar_caracter(cedula, caracter, lista_auxiliar)
             input("Presione Enter para continuar...")
             continue  # Volver al menú principal después de eliminar el carácter
             
 
         elif opcion == 6:
-            cedula = capturar_cedula()
+            print("Ingrese cedula: ")
+            cedula = capturar_solo_numeros_bloqueado()
             if not validar_cedula_real(cedula):
                 print("Cedula invalida. Intente de nuevo.")
                 input("Presione Enter para continuar...")
@@ -111,8 +129,10 @@ def main():
                 print("Error: Persona no encontrada.")
                 input("Presione Enter para continuar...")
                 continue
-            caracter = capturar_una_letra()
-            desplazamiento = validar_numero_1a25()
+            print("Ingrese un caracter: ")
+            caracter = capturar_una_letra_bloqueado()
+            print("Ingrese un desplazamiento: ")
+            desplazamiento = capturar_numero_1_a_25_bloqueado()
             lista_principal.cifrar_caracter(cedula, caracter, desplazamiento, lista_auxiliar)
             input("Presione Enter para continuar...")
             continue  # Volver al menú principal después de cifrar el carácter
@@ -143,7 +163,6 @@ def main():
             print("Opcion invalida. Intente de nuevo.")
 
         input("Presione Enter para continuar...")
-            
 
 if __name__ == "__main__":
     main()

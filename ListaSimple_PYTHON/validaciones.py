@@ -1,4 +1,15 @@
+"""
+***********************************************************************
+* UNIVERSIDAD DE LAS FUERZAS ARMADAS "ESPE"
+* ALUMNOS:  Erika Guayanay
+* FECHA ENTREGA: 06 de enero de 2025
+* PROGRAMA: Listas Circulares en python.
+* NRC: 1992
+***********************************************************************
+"""
+
 import re
+import msvcrt
 
 cedulas_registradas = set()
 
@@ -94,3 +105,77 @@ def validar_numero_1a25():
             if 1 <= numero <= 25:
                 return numero
         print("Error: Debe ingresar un numero entre 1 y 25.")
+
+def capturar_solo_numeros_bloqueado():
+    entrada = ""
+    while True:
+        tecla = msvcrt.getch()
+        if tecla.isdigit():
+            entrada += tecla.decode()
+            print(tecla.decode(), end="", flush=True)
+        elif tecla == b'\r':  # Enter key
+            if entrada == "":
+                continue
+            print()
+            return entrada
+        elif tecla == b'\x08':  # Backspace key
+            if len(entrada) > 0:
+                entrada = entrada[:-1]
+                print("\b \b", end="", flush=True)
+
+def capturar_solo_letras_bloqueado():
+    entrada = ""
+    while True:
+        tecla = msvcrt.getch()
+        if tecla.isalpha() or tecla == b' ':
+            entrada += tecla.decode()
+            print(tecla.decode(), end="", flush=True)
+        elif tecla == b'\r':  # Enter key
+            if entrada == "":
+                continue  # Do not allow to proceed if input is empty
+            print()
+            return entrada
+        elif tecla == b'\x08':  # Backspace key
+            if len(entrada) > 0:
+                entrada = entrada[:-1]
+                print("\b \b", end="", flush=True)
+
+def capturar_una_letra_bloqueado():
+    while True:
+        entrada = ""
+        while True:
+            tecla = msvcrt.getch()
+            if tecla.isalpha() and len(entrada) == 0:
+                entrada += tecla.decode()
+                print(tecla.decode(), end="", flush=True)
+            elif tecla == b'\r':  # Enter key
+                if entrada == "":
+                    continue
+                print()
+                return entrada
+            elif tecla == b'\x08':  # Backspace key
+                if len(entrada) > 0:
+                    entrada = entrada[:-1]
+                    print("\b \b", end="", flush=True)
+
+def capturar_numero_1_a_25_bloqueado():
+    while True:
+        entrada = ""
+        while True:
+            tecla = msvcrt.getch()
+            if tecla.isdigit() and len(entrada) < 2 and tecla != b'0':  # Allow only up to 2 digits and block 0
+                entrada += tecla.decode()
+                print(tecla.decode(), end="", flush=True)
+            elif tecla == b'\r':
+                if entrada == "":
+                    continue
+                if not (1 <= int(entrada) <= 25):
+                    print("\nError: El número debe estar entre 1 y 25.")
+                    entrada = ""
+                    break  # Break to allow re-entry
+                print()
+                return int(entrada)
+            elif tecla == b'\x08':
+                if len(entrada) > 0:
+                    entrada = entrada[:-1]
+                    print("\b \b", end="", flush=True)
