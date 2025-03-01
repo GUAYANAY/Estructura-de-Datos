@@ -7,20 +7,31 @@
  * Materia:                        Estructura de datos                                      *
  * NRC :                           1992                                                     *
  ********************************************************************************************/
+#pragma once
+#include <stdexcept>
 #include <iostream>
-#include "Calculo.h"
+#include <iomanip>
+#include <cmath> // Para usar log (logaritmo natural)
 
-int main()
+class TerminosMatematica
 {
-    try
+private:
+    static const double E; // e ≈ 2.71828...
+
+public:
+    static double obtenerE()
     {
-        Calculo demo;
-        demo.demostrar();
+        return E;
     }
-    catch (const std::exception &e)
-    {
-        std::cerr << "Error: " << e.what() << std::endl;
-        return 1;
-    }
-    return 0;
+
+    // Función para calcular e * log(n)
+    static double calcularELogN(double n)
+{
+    if (n <= 0)
+        throw std::invalid_argument("n debe ser mayor que 0.");
+    return E * log(n); // e * log(n)
 }
+};
+
+// Definición de la constante E
+const double TerminosMatematica::E = 2.71828182845904523536;
